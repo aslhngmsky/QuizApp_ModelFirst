@@ -1,0 +1,272 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="sinavDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="sinavDBModelStoreContainer">
+    <EntitySet Name="admin1Set" EntityType="sinavDBModel.Store.admin1Set" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ogrenciSet" EntityType="sinavDBModel.Store.ogrenciSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="sorularSet" EntityType="sinavDBModel.Store.sorularSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="sinavSet" EntityType="sinavDBModel.Store.sinavSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="adminsorular" Association="sinavDBModel.Store.adminsorular">
+      <End Role="admin1" EntitySet="admin1Set" />
+      <End Role="sorular" EntitySet="sorularSet" />
+    </AssociationSet>
+    <AssociationSet Name="adminogrenci" Association="sinavDBModel.Store.adminogrenci">
+      <End Role="admin1" EntitySet="admin1Set" />
+      <End Role="ogrenci" EntitySet="ogrenciSet" />
+    </AssociationSet>
+    <AssociationSet Name="sinavsorular" Association="sinavDBModel.Store.sinavsorular">
+      <End Role="sinav" EntitySet="sinavSet" />
+      <End Role="sorular" EntitySet="sorularSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="admin1Set">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="isim" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="sifre" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ogrenciSet">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="isim" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="dersno" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="sifre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="adminID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sorularSet">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="baslik" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="cvpa" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="cvpb" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="cvpc" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="dogrucvp" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="adminID" Type="int" Nullable="false" />
+    <Property Name="sinavID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sinavSet">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sinavadi" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="adminsorular">
+    <End Role="admin1" Type="sinavDBModel.Store.admin1Set" Multiplicity="1" />
+    <End Role="sorular" Type="sinavDBModel.Store.sorularSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="admin1">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="sorular">
+        <PropertyRef Name="adminID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="adminogrenci">
+    <End Role="admin1" Type="sinavDBModel.Store.admin1Set" Multiplicity="1" />
+    <End Role="ogrenci" Type="sinavDBModel.Store.ogrenciSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="admin1">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ogrenci">
+        <PropertyRef Name="adminID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="sinavsorular">
+    <End Role="sinav" Type="sinavDBModel.Store.sinavSet" Multiplicity="1" />
+    <End Role="sorular" Type="sinavDBModel.Store.sorularSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sinav">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="sorular">
+        <PropertyRef Name="sinavID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="sinavDBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="sinavDBModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="admin1Set" EntityType="sinavDBModel.admin1" />
+          <EntitySet Name="ogrenciSet" EntityType="sinavDBModel.ogrenci" />
+          <EntitySet Name="sorularSet" EntityType="sinavDBModel.sorular" />
+          <EntitySet Name="sinavSet" EntityType="sinavDBModel.sinav" />
+          <AssociationSet Name="adminsorular" Association="sinavDBModel.adminsorular">
+            <End Role="admin1" EntitySet="admin1Set" />
+            <End Role="sorular" EntitySet="sorularSet" />
+          </AssociationSet>
+          <AssociationSet Name="adminogrenci" Association="sinavDBModel.adminogrenci">
+            <End Role="admin1" EntitySet="admin1Set" />
+            <End Role="ogrenci" EntitySet="ogrenciSet" />
+          </AssociationSet>
+          <AssociationSet Name="sinavsorular" Association="sinavDBModel.sinavsorular">
+            <End Role="sinav" EntitySet="sinavSet" />
+            <End Role="sorular" EntitySet="sorularSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="admin1">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="isim" Type="String" Nullable="false" />
+          <Property Name="sifre" Type="String" Nullable="false" />
+          <NavigationProperty Name="sorular" Relationship="sinavDBModel.adminsorular" FromRole="admin1" ToRole="sorular" />
+          <NavigationProperty Name="ogrenci" Relationship="sinavDBModel.adminogrenci" FromRole="admin1" ToRole="ogrenci" />
+        </EntityType>
+        <EntityType Name="ogrenci">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="isim" Type="String" Nullable="false" />
+          <Property Name="dersno" Type="String" Nullable="false" />
+          <Property Name="sifre" Type="String" Nullable="false" />
+          <Property Name="adminID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="admin" Relationship="sinavDBModel.adminogrenci" FromRole="ogrenci" ToRole="admin1" />
+        </EntityType>
+        <EntityType Name="sorular">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="baslik" Type="String" Nullable="false" MaxLength="Max" />
+          <Property Name="cvpa" Type="String" Nullable="false" />
+          <Property Name="cvpb" Type="String" Nullable="false" />
+          <Property Name="cvpc" Type="String" Nullable="false" />
+          <Property Name="dogrucvp" Type="String" Nullable="false" />
+          <Property Name="adminID" Type="Int32" Nullable="false" />
+          <Property Name="sinavID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="admin" Relationship="sinavDBModel.adminsorular" FromRole="sorular" ToRole="admin1" />
+          <NavigationProperty Name="sinav" Relationship="sinavDBModel.sinavsorular" FromRole="sorular" ToRole="sinav" />
+        </EntityType>
+        <EntityType Name="sinav">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sinavadi" Type="String" Nullable="false" MaxLength="Max" />
+          <NavigationProperty Name="sorular" Relationship="sinavDBModel.sinavsorular" FromRole="sinav" ToRole="sorular" />
+        </EntityType>
+        <Association Name="adminsorular">
+          <End Type="sinavDBModel.admin1" Role="admin1" Multiplicity="1" />
+          <End Type="sinavDBModel.sorular" Role="sorular" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="admin1">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="sorular">
+              <PropertyRef Name="adminID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="adminogrenci">
+          <End Type="sinavDBModel.admin1" Role="admin1" Multiplicity="1" />
+          <End Type="sinavDBModel.ogrenci" Role="ogrenci" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="admin1">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ogrenci">
+              <PropertyRef Name="adminID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="sinavsorular">
+          <End Type="sinavDBModel.sinav" Role="sinav" Multiplicity="1" />
+          <End Type="sinavDBModel.sorular" Role="sorular" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sinav">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="sorular">
+              <PropertyRef Name="sinavID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="sinavDBModelStoreContainer" CdmEntityContainer="sinavDBModelContainer">
+    <EntitySetMapping Name="admin1Set">
+      <EntityTypeMapping TypeName="IsTypeOf(sinavDBModel.admin1)">
+        <MappingFragment StoreEntitySet="admin1Set">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="isim" ColumnName="isim" />
+          <ScalarProperty Name="sifre" ColumnName="sifre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ogrenciSet">
+      <EntityTypeMapping TypeName="IsTypeOf(sinavDBModel.ogrenci)">
+        <MappingFragment StoreEntitySet="ogrenciSet">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="isim" ColumnName="isim" />
+          <ScalarProperty Name="dersno" ColumnName="dersno" />
+          <ScalarProperty Name="sifre" ColumnName="sifre" />
+          <ScalarProperty Name="adminID" ColumnName="adminID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sorularSet">
+      <EntityTypeMapping TypeName="IsTypeOf(sinavDBModel.sorular)">
+        <MappingFragment StoreEntitySet="sorularSet">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="baslik" ColumnName="baslik" />
+          <ScalarProperty Name="cvpa" ColumnName="cvpa" />
+          <ScalarProperty Name="cvpb" ColumnName="cvpb" />
+          <ScalarProperty Name="cvpc" ColumnName="cvpc" />
+          <ScalarProperty Name="dogrucvp" ColumnName="dogrucvp" />
+          <ScalarProperty Name="adminID" ColumnName="adminID" />
+          <ScalarProperty Name="sinavID" ColumnName="sinavID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sinavSet">
+      <EntityTypeMapping TypeName="IsTypeOf(sinavDBModel.sinav)">
+        <MappingFragment StoreEntitySet="sinavSet">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="sinavadi" ColumnName="sinavadi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
